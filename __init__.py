@@ -3,10 +3,19 @@ import aqt
 from anki import hooks
 from aqt.utils import showInfo
 from aqt.qt import *
+from aqt.editor import Editor
 from anki import sound
 from shutil import copyfile
 from .lib.forvo import Forvo
 from .config import CONFIG
+
+
+def doPaste(self, html, internal, extended=False):
+    find_pronunciations(self, True, True)
+
+
+if CONFIG.get("AUTO_ADD_AUDIO_ON_PASTE", False):
+    Editor.doPaste = hooks.wrap(Editor.doPaste, doPaste)
 
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "lib"))
@@ -129,10 +138,10 @@ def add_pronunciation_from_list(editor, pronunciations):
     dialog.exec_()
 
 
-def find_pronunciations(editor, autoadd_enabled=False):
+def find_pronunciations(editor, autoadd_enabled=False, use_clipboard=False):
     word = str(editor.web.selectedText()).strip()
 
-    if not word and CONFIG.get("USE_CLIPBOARD_IF_NO_SELECTION", False):
+    if not word and use_clipboard:
         # Use clipboard if nothing is selected
         word = QApplication.clipboard().text()
 
@@ -168,10 +177,12 @@ def find_pronunciations(editor, autoadd_enabled=False):
 
 
 def setup_shortcuts(shortcuts, editor):
+    use_clipboard = CONFIG.get("USE_CLIPBOARD_IF_NO_SELECTION", False)
+
     shortcuts.append((CONFIG.get("FIND_PRONUNCIATIONS_HOTKEY", "Ctrl+Shift+F"),
-                      lambda e=editor: find_pronunciations(editor)))
+                      lambda e=editor: find_pronunciations(editor, use_clipboard=use_clipboard)))
     shortcuts.append((CONFIG.get("FIND_PRONUNCIATIONS_WITH_AUTOADD_HOTKEY", "Ctrl+F"),
-                      lambda e=editor: find_pronunciations(editor, autoadd_enabled=True)))
+                      lambda e=editor: find_pronunciations(editor, autoadd_enabled=True, use_clipboard=use_clipboard)))
 
 
 hooks.addHook("setupEditorShortcuts", setup_shortcuts)
