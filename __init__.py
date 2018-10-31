@@ -103,7 +103,9 @@ def find_pronunciations_for_word(word):
 
     forvo = Forvo(api_key=key)
 
-    return forvo.get_word_pronunciations(word, limit=CONFIG.get("FORVO_MAX_RESULTS", None))
+    return forvo.get_word_pronunciations(word,
+                                         limit=CONFIG.get("FORVO_MAX_RESULTS", None),
+                                         language=CONFIG.get("FORVO_LANGUAGE", None))
 
 
 def add_pronunciation_from_list(editor, pronunciations):

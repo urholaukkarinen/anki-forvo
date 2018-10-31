@@ -10,10 +10,11 @@ class Forvo(object):
     def __init__(self, api_key):
         self.api_key = api_key
 
-    def get_word_pronunciations(self, word, limit=None):
+    def get_word_pronunciations(self, word, limit=None, language=None):
         params = {
             "key": self.api_key,
             "limit": limit,
+            "language": language,
             "action": "word-pronunciations",
             "format": "json",
             "word": word

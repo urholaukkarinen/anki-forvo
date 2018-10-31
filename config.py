@@ -3,6 +3,7 @@ from .secret import FORVO_API_KEY
 CONFIG = {
     "FORVO_API_KEY": FORVO_API_KEY,
     "FORVO_MAX_RESULTS": 5,
+    "FORVO_LANGUAGE": "ko",
 
     # If provided, automatically selects pronunciations by these users (first match in the list is chosen)
     "FORVO_FAVORITE_USERS": [
