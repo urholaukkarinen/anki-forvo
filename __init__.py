@@ -75,7 +75,7 @@ def pronunciation_exists_for_word(word):
 
 
 def add_pronunciation(editor, filename):
-    editor.web.eval("focusField({})".format(OUTPUT_FIELD_INDEX))
+    editor.web.eval("caretToEnd(); focusField({})".format(OUTPUT_FIELD_INDEX))
     editor.addMedia(filename)
 
 
