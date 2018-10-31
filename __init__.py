@@ -132,6 +132,10 @@ def add_pronunciation_from_list(editor, pronunciations):
 def find_pronunciations(editor, autoadd_enabled=False):
     word = str(editor.web.selectedText()).strip()
 
+    if not word and CONFIG.get("USE_CLIPBOARD_IF_NO_SELECTION", False):
+        # Use clipboard if nothing is selected
+        word = QApplication.clipboard().text()
+
     if not word:
         return
 
