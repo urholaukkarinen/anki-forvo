@@ -11,7 +11,10 @@ from .config import CONFIG
 
 
 def doPaste(self, html, internal, extended=False):
-    find_pronunciations(self, True, True)
+    target_field_index = CONFIG.get("PASTE_TARGET_FIELD_INDEX", None)
+
+    if target_field_index is None or target_field_index == self.currentField:
+        find_pronunciations(self, True, True)
 
 
 if CONFIG.get("AUTO_ADD_AUDIO_ON_PASTE", False):

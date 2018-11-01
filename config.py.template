@@ -22,5 +22,9 @@ CONFIG = {
     "USE_CLIPBOARD_IF_NO_SELECTION": True,
 
     # Pronunciation is added automatically for pasted text
-    "AUTO_ADD_AUDIO_ON_PASTE": True
+    "AUTO_ADD_AUDIO_ON_PASTE": True,
+
+    # Index of the field that must be focused in order to automatically add audio.
+    # None = Any field
+    "PASTE_TARGET_FIELD_INDEX": 0
 }
