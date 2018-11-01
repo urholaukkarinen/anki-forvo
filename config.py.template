@@ -1,15 +1,15 @@
-from .secret import FORVO_API_KEY
-
 CONFIG = {
-    "FORVO_API_KEY": FORVO_API_KEY,
+    "FORVO_API_KEY": "your-api-key-here",
     "FORVO_MAX_RESULTS": 5,
-    "FORVO_LANGUAGE": "ko",
 
+    # None = all languages
+    # See https://forvo.com/languages-codes/ for supported language codes
+    "FORVO_LANGUAGE": None,
+
+    # List of names of favorite Forvo users
     # If provided, automatically selects pronunciations by these users (first match in the list is chosen)
     "FORVO_FAVORITE_USERS": [
-        "heechang2",
-        "ssoonkimi",
-        "ativ"
+
     ],
 
     # Index of the field where the audio is added. For example, in basic anki cards 0 is front and 1 is back
@@ -18,6 +18,9 @@ CONFIG = {
     "FIND_PRONUNCIATIONS_HOTKEY": "Ctrl+Shift+F",
     "FIND_PRONUNCIATIONS_WITH_AUTOADD_HOTKEY": "Ctrl+F",
 
-    "USE_CLIPBOARD_IF_NO_SELECTION": True
+    # Clipboard text is used to search for pronunciations if nothing is selected
+    "USE_CLIPBOARD_IF_NO_SELECTION": True,
+
+    # Pronunciation is added automatically for pasted text
     "AUTO_ADD_AUDIO_ON_PASTE": True
 }
