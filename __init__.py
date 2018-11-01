@@ -151,10 +151,6 @@ def find_pronunciations(editor, autoadd_enabled=False, use_clipboard=False):
     if not word:
         return
 
-    if " " in word:
-        showInfo("Sorry, singular words only.")
-        return
-
     if autoadd_enabled and pronunciation_exists_for_word(word):
         add_pronunciation(editor, get_pronunciation_filename(word))
         return
